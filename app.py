@@ -16,26 +16,31 @@ st.markdown(
     <style>
     .topbar {{
         background-color: #000000;
-        height: 130px;
+        height: 120px;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        padding: 15px 25px;
-        margin-bottom: 20px;
-        overflow: hidden;
+        justify-content: center;
+        padding: 10px 20px;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #222;
     }}
 
     .topbar img {{
-        max-height: 100%;
-        height: auto;
+        max-height: 90px;
+        max-width: 380px;
         width: auto;
+        height: auto;
         object-fit: contain;
     }}
 
     @media (max-width: 768px) {{
       .topbar {{
-        height: 110px;
-        padding: 10px 15px;
+        height: 100px;
+        padding: 10px 10px;
+      }}
+      .topbar img {{
+        max-height: 70px;
+        max-width: 260px;
       }}
     }}
     </style>
@@ -46,6 +51,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
    
