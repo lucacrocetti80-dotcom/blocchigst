@@ -32,11 +32,21 @@ header[data-testid="stHeader"] {{ display: none; }}
     .topbar img {{ max-height: 62px; }}
 }}
 
-/* CSS generale (evita titolo tagliato sotto la topbar) */
 .block-container {{ padding-top: 3.2rem !important; padding-bottom: 1.0rem; }}
 
 @media (max-width: 768px) {{
-  .block-container {{ padding-top: 2.8rem !imp
+  .block-container {{ padding-top: 2.8rem !important; padding-left: 0.8rem !important; padding-right: 0.8rem !important; }}
+}}
+</style>
+
+<div class="topbar">
+  <div class="logo-wrap">
+    <img src="data:image/png;base64,{logo_base64}">
+  </div>
+</div>
+"""
+
+st.markdown(topbar_html, unsafe_allow_html=True)
 
 
 
