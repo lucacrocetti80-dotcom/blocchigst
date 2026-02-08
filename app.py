@@ -318,13 +318,21 @@ with c2:
     st.metric("Scelta (costo per pezzo finito)", res["Scelta (costo per pezzo finito)"] if res["Scelta (costo per pezzo finito)"] else "—")
     metric("Risparmio % BLOCCO vs LASTRE", res["Risparmio % BLOCCO vs LASTRE"], "pct")
 
+def format_2dec(v):
+    if v == "" or v is None:
+        return "—"
+    if isinstance(v, str):
+        return v
+    return f"{v:,.2f}"
+
 with st.expander("Dettaglio (valori di controllo / debug)", expanded=False):
     df = pd.DataFrame(
         {
             "Voce": list(res.keys()),
-            "Valore": [res[k] for k in res.keys()],
+            "Valore": [format_2dec(res[k]) for k in res.keys()],
         }
     )
     st.dataframe(df, use_container_width=True)
+
 
 st.caption("Suggerimento: su mobile apri l’area “Input” solo quando devi cambiare i parametri.")
