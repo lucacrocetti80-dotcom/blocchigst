@@ -3,11 +3,14 @@ import streamlit as st
 import pandas as pd
 import base64
 
-def get_base64(file_path):
+import base64
+
+def get_base64(file_path: str) -> str:
     with open(file_path, "rb") as f:
-        return base64.b64encode(f.read()).decode()
+        return base64.b64encode(f.read()).decode("utf-8")
 
 logo_base64 = get_base64("lys.png")
+
 st.markdown(
     f"""
     <style>
