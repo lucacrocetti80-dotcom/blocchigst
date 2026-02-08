@@ -211,7 +211,8 @@ def format_2dec(v):
 # ---------------------------
 # UI
 # ---------------------------
-st.title("Confronto costi: BLOCCO vs LASTRE")
+st.markdown("## Confronto costi: BLOCCO vs LASTRE")
+
 
 defaults = dict(
     lunghezza_blocco_mm=3000,
