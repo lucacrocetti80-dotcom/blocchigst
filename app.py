@@ -48,22 +48,7 @@ st.markdown(
 )
 
 
-    }}
-
-    .topbar img {{
-        max-height: 100%;
-        height: auto;
-        width: auto;
-        object-fit: contain;
-    }}
-
-    @media (max-width: 768px) {{
-      .topbar {{
-        height: 110px;
-        padding: 10px 15px;
-      }}
-    }}
-    </style>
+   
 
     <div class="topbar">
         <img src="data:image/png;base64,{logo_base64}">
