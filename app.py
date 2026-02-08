@@ -49,7 +49,7 @@ header[data-testid="stHeader"] { display: none; }
 st.markdown(topbar_html, unsafe_allow_html=True)
 
 
-.topbar .logo-
+
 
 
 # ---------------------------
