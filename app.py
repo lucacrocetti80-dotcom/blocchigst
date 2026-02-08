@@ -27,26 +27,42 @@ st.markdown(
         margin: 0 0 22px 0;
         display: flex;
         align-items: center;
-        justify
+        justify-content: center;
+        border-bottom: 2px solid #222;
+        overflow: visible;
+    }}
 
+    .topbar .logo-wrap {{
+        line-height: 0;
+        overflow: visible;
+    }}
 
+    .topbar img {{
+        display: block;
+        max-height: 90px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }}
 
-   
+    @media (max-width: 768px) {{
+        .topbar {{
+            padding: 14px 10px;
+        }}
+        .topbar img {{
+            max-height: 68px;
+        }}
+    }}
+    </style>
 
-    
+    <div class="topbar">
+      <div class="logo-wrap">
+        <img src="data:image/png;base64,{logo_base64}">
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True
 
-
-
-st.set_page_config(
-    page_title="Confronto costi: Blocco vs Lastre",
-    layout="wide",
-    initial_sidebar_state="collapsed",  # su mobile evita sidebar aperta
-)
-
-# ---------------------------
-# CSS: riduce font troppo grandi, compatta padding, rende tabelle più usabili
-# ---------------------------
-st.markdown(
     """
 <style>
 /* Riduce spaziatura generale */
