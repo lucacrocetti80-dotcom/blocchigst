@@ -65,7 +65,7 @@ div[data-testid="stDataFrame"] * { font-size: 0.85rem !important; }
 }
 
 .card-lastre {
-    background: rgba(200, 120, 0, 0.10);
+    background: rgba(200, 120, 0, 0.000);
     border: 1px solid rgba(200, 120, 0, 0.50);
     padding: 16px;
     border-radius: 4px;
