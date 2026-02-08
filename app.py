@@ -1,6 +1,7 @@
-# app.py — Confronto costi: BLOCCO vs LASTRE (versione stabile senza CSS/Logo custom)
+# app.py — Confronto costi: BLOCCO vs LASTRE
 import streamlit as st
 import pandas as pd
+import base64
 
 st.set_page_config(
     page_title="Confronto costi: BLOCCO vs LASTRE",
@@ -8,8 +9,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-import base64
-
+# ---------------------------
+# Barra nera con logo (lys.png nella root del repo)
+# ---------------------------
 def get_base64(file_path: str) -> str:
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
@@ -25,10 +27,10 @@ st.markdown(
         display:flex;
         justify-content:center;
         align-items:center;
-        margin-bottom:25px;
+        margin-bottom:18px;
     ">
         <img src="data:image/png;base64,{logo_base64}" style="
-            height:70px;
+            height:60px;
             width:auto;
             display:block;
         ">
@@ -37,27 +39,46 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# ---------------------------
+# CSS: font più piccoli + cards BLOCCO/LASTRE
+# ---------------------------
 st.markdown("""
 <style>
+/* Titoli più piccoli */
 h1 { font-size: 1.6rem !important; }
-h2 { font-size: 1.25rem !important; }
+h2 { font-size: 1.20rem !important; }
 h3 { font-size: 1.05rem !important; }
 
-div[data-testid="stMetricValue"] {
-    font-size: 1.25rem !important;
+/* Metriche più compatte */
+div[data-testid="stMetricValue"] { font-size: 1.15rem !important; }
+div[data-testid="stMetricLabel"] { font-size: 0.88rem !important; }
+
+/* Dataframe: testo più piccolo */
+div[data-testid="stDataFrame"] * { font-size: 0.85rem !important; }
+
+/* Cards */
+.card-blocco {
+    background: rgba(0, 80, 160, 0.12);
+    border: 1px solid rgba(0, 80, 160, 0.35);
+    padding: 16px;
+    border-radius: 14px;
 }
 
-div[data-testid="stMetricLabel"] {
-    font-size: 0.9rem !important;
+.card-lastre {
+    background: rgba(200, 120, 0, 0.12);
+    border: 1px solid rgba(200, 120, 0, 0.35);
+    padding: 16px;
+    border-radius: 14px;
 }
 
-div[data-testid="stDataFrame"] * {
-    font-size: 0.85rem !important;
+.card-title {
+    font-size: 1.02rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.4px;
 }
 </style>
 """, unsafe_allow_html=True)
-
-
 
 # ---------------------------
 # Calcolo
@@ -204,7 +225,6 @@ def calc(inputs: dict) -> dict:
         "Residuo profondità (mm)": E26,
     }
 
-
 def metric(label, val, kind="num"):
     if val == "" or val is None:
         st.metric(label, "—")
@@ -218,7 +238,6 @@ def metric(label, val, kind="num"):
     else:
         st.metric(label, f"{val:,.2f}")
 
-
 def format_2dec(v):
     if v == "" or v is None:
         return "—"
@@ -226,12 +245,10 @@ def format_2dec(v):
         return v
     return f"{v:,.2f}"
 
-
 # ---------------------------
 # UI
 # ---------------------------
 st.markdown("## Confronto costi: BLOCCO vs LASTRE")
-
 
 defaults = dict(
     lunghezza_blocco_mm=3000,
@@ -268,7 +285,7 @@ with st.expander("Input (apri/chiudi)", expanded=False):
     with c1:
         inputs["lunghezza_blocco_mm"] = st.number_input("Lunghezza blocco (mm)", value=float(defaults["lunghezza_blocco_mm"]), step=10.0)
         inputs["profondita_blocco_mm"] = st.number_input("Profondità blocco (mm)", value=float(defaults["profondita_blocco_mm"]), step=10.0)
-        inputs["squadra_per_lato_L_mm"] = st.number_input("Squl squadratura per lato (L) (mm)", value=float(defaults["squadra_per_lato_L_mm"]), step=1.0)
+        inputs["squadra_per_lato_L_mm"] = st.number_input("Squadratura per lato (L) (mm)", value=float(defaults["squadra_per_lato_L_mm"]), step=1.0)
         inputs["kerf_mm"] = st.number_input("Strido / kerf (mm)", value=float(defaults["kerf_mm"]), step=0.5)
     with c2:
         inputs["altezza_blocco_mm"] = st.number_input("Altezza blocco (mm)", value=float(defaults["altezza_blocco_mm"]), step=10.0)
@@ -310,25 +327,35 @@ with st.expander("Input (apri/chiudi)", expanded=False):
 
 res = calc(inputs)
 
+# ---------------------------
+# Risultati principali (cards)
+# ---------------------------
 st.subheader("Risultati principali")
+
 colA, colB = st.columns(2)
 
 with colA:
-    st.markdown("**BLOCCO**")
+    st.markdown('<div class="card-blocco"><div class="card-title">BLOCCO</div>', unsafe_allow_html=True)
     metric("Costo totale", res["Costo totale BLOCCO (€)"], "eur")
     metric("€/m² NETTO", res["Costo per m² NETTO – BLOCCO (€/m²)"], "eur_m2")
     metric("Costo/pezzo", res["Costo per pezzo finito – BLOCCO (€)"], "eur")
     metric("Sfrido", res["Sfrido % – BLOCCO"], "pct")
+    st.markdown("</div>", unsafe_allow_html=True)
 
 with colB:
-    st.markdown("**LASTRE**")
+    st.markdown('<div class="card-lastre"><div class="card-title">LASTRE</div>', unsafe_allow_html=True)
     metric("Costo totale", res["Costo totale LASTRE (€)"], "eur")
     metric("€/m² NETTO", res["Costo per m² NETTO – LASTRE (€/m²)"], "eur_m2")
     metric("Costo/pezzo", res["Costo per pezzo finito – LASTRE (€)"], "eur")
     metric("Sfrido", res["Sfrido % – LASTRE"], "pct")
+    st.markdown("</div>", unsafe_allow_html=True)
 
+# ---------------------------
+# Confronto
+# ---------------------------
 st.divider()
 st.subheader("Confronto")
+
 c1, c2 = st.columns(2)
 with c1:
     metric("Differenza costo totale (LASTRE - BLOCCO)", res["Differenza costo totale (LASTRE - BLOCCO) (€)"], "eur")
@@ -337,6 +364,9 @@ with c2:
     st.metric("Scelta (costo per pezzo finito)", res["Scelta (costo per pezzo finito)"] if res["Scelta (costo per pezzo finito)"] else "—")
     metric("Risparmio % BLOCCO vs LASTRE", res["Risparmio % BLOCCO vs LASTRE"], "pct")
 
+# ---------------------------
+# Dettaglio
+# ---------------------------
 with st.expander("Dettaglio (valori di controllo / debug)", expanded=False):
     df = pd.DataFrame({"Voce": list(res.keys()), "Valore": [format_2dec(res[k]) for k in res.keys()]})
     st.dataframe(df, use_container_width=True)
