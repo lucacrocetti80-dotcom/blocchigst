@@ -14,11 +14,9 @@ logo_base64 = get_base64("lys.png")
 st.markdown(
     f"""
     <style>
-    /* Nasconde header/footer Streamlit */
     header[data-testid="stHeader"] {{ display: none; }}
     footer {{ display: none; }}
 
-    /* Topbar fissa in alto */
     .topbar {{
         position: sticky;
         top: 0;
@@ -29,26 +27,7 @@ st.markdown(
         margin: 0 0 22px 0;
         display: flex;
         align-items: center;
-        justify-content: center;
-        border-bottom: 2px solid #222;
-        overflow: visible;
-    }}
-
-    /* Wrapper logo: elimina “clipping” da line-height */
-    .topbar .logo-wrap {{
-        line-height: 0;
-        overflow: visible;
-    }}
-
-    .topbar img {{
-        display: block;
-        max-height: 90px;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-    }}
-
-    @media (max-width: 768px) {{
+        justify
 
 
 
