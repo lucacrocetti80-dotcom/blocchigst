@@ -8,11 +8,35 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-c1, c2 = st.columns([1, 5])
-with c1:
-    st.image("lys.png", width=180)
+import base64
 
-st.markdown("<br>", unsafe_allow_html=True)
+def get_base64(file_path: str) -> str:
+    with open(file_path, "rb") as f:
+        return base64.b64encode(f.read()).decode("utf-8")
+
+logo_base64 = get_base64("lys.png")
+
+st.markdown(
+    f"""
+    <div style="
+        background-color:#000000;
+        width:100%;
+        padding:18px 0px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin-bottom:25px;
+    ">
+        <img src="data:image/png;base64,{logo_base64}" style="
+            height:70px;
+            width:auto;
+            display:block;
+        ">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 
 
 
