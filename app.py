@@ -354,7 +354,7 @@ with colB:
 # Confronto
 # ---------------------------
 st.divider()
-st.subheader("Confronto")
+st.subheader("RISULTATI BLOCCO vs LASTRE")
 
 c1, c2 = st.columns(2)
 with c1:
