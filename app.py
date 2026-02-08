@@ -61,14 +61,14 @@ div[data-testid="stDataFrame"] * { font-size: 0.85rem !important; }
     background: rgba(0, 80, 160, 0.00);
     border: 1px solid rgba(255, 255, 255, 0.50);
     padding: 16px;
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 .card-lastre {
     background: rgba(200, 120, 0, 0.000);
-    border: 1px solid rgba(200, 120, 0, 0.50);
+    border: 1px solid rgba(255, 255, 255, 0.50);
     padding: 16px;
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 .card-title {
