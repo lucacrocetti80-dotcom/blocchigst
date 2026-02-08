@@ -1,58 +1,7 @@
 # app.py — versione ottimizzata per mobile + font più “puliti”
 import streamlit as st
 import pandas as pd
-import base64
 
-import base64
-
-import base64
-
-def get_base64(file_path: str) -> str:
-    with open(file_path, "rb") as f:
-        return base64.b64encode(f.read()).decode("utf-8")
-
-logo_base64 = get_base64("assets/lys.png")
-
-topbar_html = """
-<style>
-header[data-testid="stHeader"] { display: none; }
-
-.topbar {
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-    background-color: #000000;
-    width: 100%;
-    padding: 16px 20px;
-    margin: 0 0 22px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 2px solid #222;
-}
-
-.topbar .logo-wrap {
-    line-height: 0;
-}
-
-.topbar img {
-    display: block;
-    max-height: 88px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-}
-
-@media (max-width: 768px) {
-    .topbar { pad
-
-
-def get_base64(file_path: str) -> str:
-    with open(file_path, "rb") as f:
-        return base64.b64encode(f.read()).decode("utf-8")
-
-logo_base64 = get_base64("lys.png")
-st.write("Logo caricato:", len(logo_base64))
 
 st.markdown(
     """
