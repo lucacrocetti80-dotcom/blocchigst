@@ -1,57 +1,15 @@
-# CSS + Topbar in un unico blocco (f-string)
-topbar_html = f"""
-<style>
-header[data-testid="stHeader"] {{ display: none; }}
+# app.py — Confronto costi: BLOCCO vs LASTRE (versione stabile senza CSS/Logo custom)
+import streamlit as st
+import pandas as pd
 
-.topbar {{
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-    background-color: #000000;
-    width: 100%;
-    padding: 16px 20px;
-    margin: 0 0 22px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 2px solid #222;
-}}
-
-.topbar .logo-wrap {{ line-height: 0; }}
-
-.topbar img {{
-    display: block;
-    max-height: 88px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-}}
-
-@media (max-width: 768px) {{
-    .topbar {{ padding: 12px 10px; }}
-    .topbar img {{ max-height: 62px; }}
-}}
-
-.block-container {{ padding-top: 3.2rem !important; padding-bottom: 1.0rem; }}
-
-@media (max-width: 768px) {{
-  .block-container {{ padding-top: 2.8rem !important; padding-left: 0.8rem !important; padding-right: 0.8rem !important; }}
-}}
-</style>
-
-<div class="topbar">
-  <div class="logo-wrap">
-    <img src="data:image/png;base64,{logo_base64}">
-  </div>
-</div>
-"""
-
-st.markdown(topbar_html, unsafe_allow_html=True)
-
-
+st.set_page_config(
+    page_title="Confronto costi: BLOCCO vs LASTRE",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
 
 # ---------------------------
-# Calcolo (stessa logica della tua app precedente)
+# Calcolo
 # ---------------------------
 def calc(inputs: dict) -> dict:
     # Inputs
@@ -191,7 +149,6 @@ def calc(inputs: dict) -> dict:
         "Scelta (costo per pezzo finito)": E54,
         "Risparmio % BLOCCO vs LASTRE": E55,
 
-        # debug utili
         "Profondità usata (mm)": E25,
         "Residuo profondità (mm)": E26,
     }
@@ -211,13 +168,17 @@ def metric(label, val, kind="num"):
         st.metric(label, f"{val:,.2f}")
 
 
-# ---------------------------
-# UI: mobile-friendly
-# - Input in expander (così su mobile non occupa tutto)
-# - Risultati principali sempre visibili
-# - Dettagli in expander
-# ---------------------------
+def format_2dec(v):
+    if v == "" or v is None:
+        return "—"
+    if isinstance(v, str):
+        return v
+    return f"{v:,.2f}"
 
+
+# ---------------------------
+# UI
+# ---------------------------
 st.title("Confronto costi: BLOCCO vs LASTRE")
 
 defaults = dict(
@@ -249,14 +210,13 @@ defaults = dict(
 )
 
 inputs = {}
-
 with st.expander("Input (apri/chiudi)", expanded=False):
     st.subheader("Blocco")
     c1, c2 = st.columns(2)
     with c1:
         inputs["lunghezza_blocco_mm"] = st.number_input("Lunghezza blocco (mm)", value=float(defaults["lunghezza_blocco_mm"]), step=10.0)
         inputs["profondita_blocco_mm"] = st.number_input("Profondità blocco (mm)", value=float(defaults["profondita_blocco_mm"]), step=10.0)
-        inputs["squadra_per_lato_L_mm"] = st.number_input("Squadratura per lato (L) (mm)", value=float(defaults["squadra_per_lato_L_mm"]), step=1.0)
+        inputs["squadra_per_lato_L_mm"] = st.number_input("Squl squadratura per lato (L) (mm)", value=float(defaults["squadra_per_lato_L_mm"]), step=1.0)
         inputs["kerf_mm"] = st.number_input("Strido / kerf (mm)", value=float(defaults["kerf_mm"]), step=0.5)
     with c2:
         inputs["altezza_blocco_mm"] = st.number_input("Altezza blocco (mm)", value=float(defaults["altezza_blocco_mm"]), step=10.0)
@@ -299,8 +259,6 @@ with st.expander("Input (apri/chiudi)", expanded=False):
 res = calc(inputs)
 
 st.subheader("Risultati principali")
-
-# 2 colonne = meglio su mobile (Streamlit impila automaticamente)
 colA, colB = st.columns(2)
 
 with colA:
@@ -319,7 +277,6 @@ with colB:
 
 st.divider()
 st.subheader("Confronto")
-
 c1, c2 = st.columns(2)
 with c1:
     metric("Differenza costo totale (LASTRE - BLOCCO)", res["Differenza costo totale (LASTRE - BLOCCO) (€)"], "eur")
@@ -328,21 +285,8 @@ with c2:
     st.metric("Scelta (costo per pezzo finito)", res["Scelta (costo per pezzo finito)"] if res["Scelta (costo per pezzo finito)"] else "—")
     metric("Risparmio % BLOCCO vs LASTRE", res["Risparmio % BLOCCO vs LASTRE"], "pct")
 
-def format_2dec(v):
-    if v == "" or v is None:
-        return "—"
-    if isinstance(v, str):
-        return v
-    return f"{v:,.2f}"
-
 with st.expander("Dettaglio (valori di controllo / debug)", expanded=False):
-    df = pd.DataFrame(
-        {
-            "Voce": list(res.keys()),
-            "Valore": [format_2dec(res[k]) for k in res.keys()],
-        }
-    )
+    df = pd.DataFrame({"Voce": list(res.keys()), "Valore": [format_2dec(res[k]) for k in res.keys()]})
     st.dataframe(df, use_container_width=True)
-
 
 st.caption("Suggerimento: su mobile apri l’area “Input” solo quando devi cambiare i parametri.")
