@@ -8,9 +8,12 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-c1, c2, c3 = st.columns([1,2,1])
-with c2:
-    st.image("lys.png", use_container_width=True)
+c1, c2 = st.columns([1, 5])
+with c1:
+    st.image("lys.png", width=180)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
 
 
 # ---------------------------
