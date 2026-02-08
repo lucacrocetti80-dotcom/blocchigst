@@ -19,12 +19,42 @@ st.markdown(
         align-items: center;        /* centra verticalmente */
         padding: 0 24px;
         margin-bottom: 18px;
+st.markdown(
+    f"""
+    <style>
+    .topbar {{
+        background-color: #000000;
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 15px 25px;
+        margin-bottom: 20px;
+        overflow: hidden;
     }}
+
     .topbar img {{
-        height: 85px;               /* logo più grande */
+        max-height: 100%;
+        height: auto;
         width: auto;
         object-fit: contain;
     }}
+
+    @media (max-width: 768px) {{
+      .topbar {{
+        height: 110px;
+        padding: 10px 15px;
+      }}
+    }}
+    </style>
+
+    <div class="topbar">
+        <img src="data:image/png;base64,{logo_base64}">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 
     /* Mobile: barra meno alta, logo comunque ben visibile */
     @media (max-width: 768px) {{
