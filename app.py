@@ -14,41 +14,41 @@ logo_base64 = get_base64("lys.png")
 st.markdown(
     f"""
     <style>
+    /* Nasconde header/footer Streamlit */
+    header[data-testid="stHeader"] {{ display: none; }}
+    footer {{ display: none; }}
+
+    /* Topbar fissa in alto */
     .topbar {{
+        position: sticky;
+        top: 0;
+        z-index: 9999;
         background-color: #000000;
         width: 100%;
-        padding: 18px 20px;      /* spazio sopra/sotto */
-        margin-bottom: 25px;
+        padding: 18px 20px;
+        margin: 0 0 22px 0;
         display: flex;
         align-items: center;
         justify-content: center;
         border-bottom: 2px solid #222;
+        overflow: visible;
+    }}
+
+    /* Wrapper logo: elimina “clipping” da line-height */
+    .topbar .logo-wrap {{
+        line-height: 0;
+        overflow: visible;
     }}
 
     .topbar img {{
         display: block;
-        max-height: 85px;
+        max-height: 90px;
         width: auto;
         height: auto;
         object-fit: contain;
     }}
 
     @media (max-width: 768px) {{
-        .topbar {{
-            padding: 14px 10px;
-        }}
-        .topbar img {{
-            max-height: 60px;
-        }}
-    }}
-    </style>
-
-    <div class="topbar">
-        <img src="data:image/png;base64,{logo_base64}">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
 
 
 
