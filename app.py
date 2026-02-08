@@ -1,6 +1,37 @@
 # app.py — versione ottimizzata per mobile + font più “puliti”
 import streamlit as st
 import pandas as pd
+import base64
+
+def get_base64(file_path):
+    with open(file_path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+logo_base64 = get_base64("lys.png")
+
+st.markdown(
+    f"""
+    <style>
+    .topbar {{
+        background-color: #000000;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        margin-bottom: 20px;
+    }}
+    .topbar img {{
+        height: 45px;
+    }}
+    </style>
+
+    <div class="topbar">
+        <img src="data:image/png;base64,{logo_base64}">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 
 st.set_page_config(
     page_title="Confronto costi: Blocco vs Lastre",
