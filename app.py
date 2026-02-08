@@ -37,6 +37,25 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.markdown("""
+<style>
+h1 { font-size: 1.6rem !important; }
+h2 { font-size: 1.25rem !important; }
+h3 { font-size: 1.05rem !important; }
+
+div[data-testid="stMetricValue"] {
+    font-size: 1.25rem !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    font-size: 0.9rem !important;
+}
+
+div[data-testid="stDataFrame"] * {
+    font-size: 0.85rem !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 
 
