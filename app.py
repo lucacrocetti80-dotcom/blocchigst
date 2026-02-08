@@ -58,15 +58,15 @@ div[data-testid="stDataFrame"] * { font-size: 0.85rem !important; }
 
 /* Cards */
 .card-blocco {
-    background: rgba(0, 80, 160, 0.50);
-    border: 1px solid rgba(0, 80, 160, 0.35);
+    background: rgba(0, 80, 160, 0.10);
+    border: 1px solid rgba(0, 80, 160, 0.50);
     padding: 16px;
     border-radius: 14px;
 }
 
 .card-lastre {
-    background: rgba(200, 120, 0, 0.12);
-    border: 1px solid rgba(200, 120, 0, 0.35);
+    background: rgba(200, 120, 0, 0.10);
+    border: 1px solid rgba(200, 120, 0, 0.50);
     padding: 16px;
     border-radius: 14px;
 }
