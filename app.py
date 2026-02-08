@@ -1,21 +1,3 @@
-# app.py — versione ottimizzata per mobile + font più “puliti”
-import streamlit as st
-import pandas as pd
-import base64
-
-st.set_page_config(
-    page_title="Confronto costi: BLOCCO vs LASTRE",
-    layout="wide",
-    initial_sidebar_state="collapsed",
-)
-
-def get_base64(file_path: str) -> str:
-    with open(file_path, "rb") as f:
-        return base64.b64encode(f.read()).decode("utf-8")
-
-# Logo fisso (metti il file qui)
-logo_base64 = get_base64("assets/lys.png")
-
 # CSS + Topbar in un unico blocco (stringa normale, NO f-string)
 topbar_html = """
 <style>
@@ -34,6 +16,38 @@ header[data-testid="stHeader"] { display: none; }
     justify-content: center;
     border-bottom: 2px solid #222;
 }
+
+.topbar .logo-wrap { line-height: 0; }
+
+.topbar img {
+    display: block;
+    max-height: 88px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .topbar { padding: 12px 10px; }
+    .topbar img { max-height: 62px; }
+}
+
+/* CSS generale (evita titolo tagliato sotto la topbar) */
+.block-container { padding-top: 3.2rem !important; padding-bottom: 1.0rem; }
+@media (max-width: 768px) {
+  .block-container { padding-top: 2.8rem !important; padding-left: 0.8rem !important; padding-right: 0.8rem !important; }
+}
+</style>
+
+<div class="topbar">
+  <div class="logo-wrap">
+    <img src="data:image/png;base64,{logo}">
+  </div>
+</div>
+""".format(logo=logo_base64)
+
+st.markdown(topbar_html, unsafe_allow_html=True)
+
 
 .topbar .logo-
 
