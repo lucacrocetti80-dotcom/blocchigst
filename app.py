@@ -16,32 +16,30 @@ st.markdown(
     <style>
     .topbar {{
         background-color: #000000;
-        height: 120px;
+        width: 100%;
+        padding: 18px 20px;      /* spazio sopra/sotto */
+        margin-bottom: 25px;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px 20px;
-        margin-bottom: 25px;
         border-bottom: 2px solid #222;
     }}
 
     .topbar img {{
-        max-height: 90px;
-        max-width: 380px;
+        display: block;
+        max-height: 85px;
         width: auto;
         height: auto;
         object-fit: contain;
     }}
 
     @media (max-width: 768px) {{
-      .topbar {{
-        height: 100px;
-        padding: 10px 10px;
-      }}
-      .topbar img {{
-        max-height: 70px;
-        max-width: 260px;
-      }}
+        .topbar {{
+            padding: 14px 10px;
+        }}
+        .topbar img {{
+            max-height: 60px;
+        }}
     }}
     </style>
 
