@@ -10,6 +10,7 @@ def get_base64(file_path: str) -> str:
         return base64.b64encode(f.read()).decode("utf-8")
 
 logo_base64 = get_base64("lys.png")
+st.write("Logo caricato:", len(logo_base64))
 
 st.markdown(
     """
