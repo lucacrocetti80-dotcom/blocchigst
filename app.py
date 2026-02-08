@@ -1,73 +1,42 @@
 # app.py — versione ottimizzata per mobile + font più “puliti”
 import streamlit as st
 import pandas as pd
+import base64
 
-
-
-    .topbar {{
-        position: sticky;
-        top: 0;
-        z-index: 9999;
-        background-color: #000000;
-        width: 100%;
-        padding: 18px 20px;
-        margin: 0 0 22px 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 2px solid #222;
-        overflow: visible;
-    }}
-
-    .topbar .logo-wrap {{
-        line-height: 0;
-        overflow: visible;
-    }}
-
-    .topbar img {{
-        display: block;
-        max-height: 90px;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-    }}
-
-    @media (max-width: 768px) {{
-        .topbar {{
-            padding: 14px 10px;
-        }}
-        .topbar img {{
-            max-height: 68px;
-        }}
-    }}
-    </style>
-
-<style>
-/* Riduce spaziatura generale */
-.block-container { padding-top: 1.0rem; padding-bottom: 1.0rem; }
-
-/* Titoli meno “giganti” */
-h1 { font-size: 1.6rem !important; line-height: 1.2 !important; }
-h2 { font-size: 1.25rem !important; }
-h3 { font-size: 1.05rem !important; }
-
-/* Metriche: font più contenuto */
-div[data-testid="stMetricValue"] { font-size: 1.35rem !important; }
-div[data-testid="stMetricLabel"] { font-size: 0.95rem !important; }
-
-/* Dataframe: testo più piccolo */
-div[data-testid="stDataFrame"] * { font-size: 0.88rem !important; }
-
-/* Su schermi piccoli: ancora più compatto */
-@media (max-width: 768px) {
-  .block-container { padding-left: 0.8rem; padding-right: 0.8rem; }
-  h1 { font-size: 1.35rem !important; }
-  div[data-testid="stMetricValue"] { font-size: 1.15rem !important; }
-}
-</style>
-""",
-    unsafe_allow_html=True,
+st.set_page_config(
+    page_title="Confronto costi: BLOCCO vs LASTRE",
+    layout="wide",
+    initial_sidebar_state="collapsed",
 )
+
+def get_base64(file_path: str) -> str:
+    with open(file_path, "rb") as f:
+        return base64.b64encode(f.read()).decode("utf-8")
+
+# Logo fisso (metti il file qui)
+logo_base64 = get_base64("assets/lys.png")
+
+# CSS + Topbar in un unico blocco (stringa normale, NO f-string)
+topbar_html = """
+<style>
+header[data-testid="stHeader"] { display: none; }
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background-color: #000000;
+    width: 100%;
+    padding: 16px 20px;
+    margin: 0 0 22px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #222;
+}
+
+.topbar .logo-
+
 
 # ---------------------------
 # Calcolo (stessa logica della tua app precedente)
