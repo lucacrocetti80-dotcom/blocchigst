@@ -55,15 +55,6 @@ st.markdown(
     }}
     </style>
 
-    <div class="topbar">
-      <div class="logo-wrap">
-        <img src="data:image/png;base64,{logo_base64}">
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-
-    """
 <style>
 /* Riduce spaziatura generale */
 .block-container { padding-top: 1.0rem; padding-bottom: 1.0rem; }
