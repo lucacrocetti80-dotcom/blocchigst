@@ -14,14 +14,22 @@ st.markdown(
     <style>
     .topbar {{
         background-color: #000000;
-        height: 70px;
+        height: 110px;              /* barra più alta */
         display: flex;
-        align-items: center;
-        padding-left: 20px;
-        margin-bottom: 20px;
+        align-items: center;        /* centra verticalmente */
+        padding: 0 24px;
+        margin-bottom: 18px;
     }}
     .topbar img {{
-        height: 45px;
+        height: 85px;               /* logo più grande */
+        width: auto;
+        object-fit: contain;
+    }}
+
+    /* Mobile: barra meno alta, logo comunque ben visibile */
+    @media (max-width: 768px) {{
+      .topbar {{ height: 90px; padding: 0 16px; }}
+      .topbar img {{ height: 70px; }}
     }}
     </style>
 
@@ -31,6 +39,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 st.set_page_config(
