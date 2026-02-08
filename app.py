@@ -8,7 +8,6 @@ def get_base64(file_path):
         return base64.b64encode(f.read()).decode()
 
 logo_base64 = get_base64("lys.png")
-  }}
 st.markdown(
     f"""
     <style>
