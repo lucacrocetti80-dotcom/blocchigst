@@ -1,9 +1,9 @@
-# CSS + Topbar in un unico blocco (stringa normale, NO f-string)
-topbar_html = """
+# CSS + Topbar in un unico blocco (f-string)
+topbar_html = f"""
 <style>
-header[data-testid="stHeader"] { display: none; }
+header[data-testid="stHeader"] {{ display: none; }}
 
-.topbar {
+.topbar {{
     position: sticky;
     top: 0;
     z-index: 9999;
@@ -15,40 +15,28 @@ header[data-testid="stHeader"] { display: none; }
     align-items: center;
     justify-content: center;
     border-bottom: 2px solid #222;
-}
+}}
 
-.topbar .logo-wrap { line-height: 0; }
+.topbar .logo-wrap {{ line-height: 0; }}
 
-.topbar img {
+.topbar img {{
     display: block;
     max-height: 88px;
     width: auto;
     height: auto;
     object-fit: contain;
-}
+}}
 
-@media (max-width: 768px) {
-    .topbar { padding: 12px 10px; }
-    .topbar img { max-height: 62px; }
-}
+@media (max-width: 768px) {{
+    .topbar {{ padding: 12px 10px; }}
+    .topbar img {{ max-height: 62px; }}
+}}
 
 /* CSS generale (evita titolo tagliato sotto la topbar) */
-.block-container { padding-top: 3.2rem !important; padding-bottom: 1.0rem; }
-@media (max-width: 768px) {
-  .block-container { padding-top: 2.8rem !important; padding-left: 0.8rem !important; padding-right: 0.8rem !important; }
-}
-</style>
+.block-container {{ padding-top: 3.2rem !important; padding-bottom: 1.0rem; }}
 
-<div class="topbar">
-  <div class="logo-wrap">
-    <img src="data:image/png;base64,{logo}">
-  </div>
-</div>
-""".format(logo=logo_base64)
-
-st.markdown(topbar_html, unsafe_allow_html=True)
-
-
+@media (max-width: 768px) {{
+  .block-container {{ padding-top: 2.8rem !imp
 
 
 
