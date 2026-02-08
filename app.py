@@ -50,27 +50,7 @@ st.markdown(
 
    
 
-    <div class="topbar">
-        <img src="data:image/png;base64,{logo_base64}">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-    /* Mobile: barra meno alta, logo comunque ben visibile */
-    @media (max-width: 768px) {{
-      .topbar {{ height: 90px; padding: 0 16px; }}
-      .topbar img {{ height: 70px; }}
-    }}
-    </style>
-
-    <div class="topbar">
-        <img src="data:image/png;base64,{logo_base64}">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+    
 
 
 
