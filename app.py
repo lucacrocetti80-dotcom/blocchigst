@@ -68,7 +68,7 @@ div[data-testid="stDataFrame"] * { font-size: 0.85rem !important; }
     background: rgba(200, 120, 0, 0.10);
     border: 1px solid rgba(200, 120, 0, 0.50);
     padding: 16px;
-    border-radius: 14px;
+    border-radius: 4px;
 }
 
 .card-title {
