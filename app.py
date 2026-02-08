@@ -58,7 +58,7 @@ div[data-testid="stDataFrame"] * { font-size: 0.85rem !important; }
 
 /* Cards */
 .card-blocco {
-    background: rgba(0, 80, 160, 0.10);
+    background: rgba(0, 80, 160, 0.00);
     border: 1px solid rgba(0, 80, 160, 0.50);
     padding: 16px;
     border-radius: 4px;
