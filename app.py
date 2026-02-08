@@ -12,7 +12,7 @@ def get_base64(file_path: str) -> str:
 logo_base64 = get_base64("lys.png")
 
 st.markdown(
-    f"""
+    """
     <style>
     header[data-testid="stHeader"] {{ display: none; }}
     footer {{ display: none; }}
