@@ -2,28 +2,6 @@
 import streamlit as st
 import pandas as pd
 
-
-st.markdown(
-    """
-    <style>
-    header[data-testid="stHeader"] {{ display: none; }}
-    footer {{ display: none; }}
-
-    st.markdown(
-    """
-    <style>
-    /* Spinge giù il contenuto per non farlo finire sotto la topbar */
-    .block-container { padding-top: 2.8rem !important; }
-
-    @media (max-width: 768px) {
-      .block-container { padding-top: 2.4rem !important; }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-
     .topbar {{
         position: sticky;
         top: 0;
